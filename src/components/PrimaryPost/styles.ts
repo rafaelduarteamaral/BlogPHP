@@ -53,7 +53,7 @@ export const SecondPost = styled.div`
   bottom: 0;
   left: 0;
   transition: margin-top 0.66s;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   word-wrap: break-word;
 
   a {

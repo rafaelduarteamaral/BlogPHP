@@ -2,57 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Post, SecondPost, BoxPost } from './styles';
 
-const PrimaryPost: React.FC = () => {
+interface ArtciclesProps {
+  Articles: Array<{
+    id: number;
+    title: string;
+    img: string;
+    text: string;
+  }>;
+}
+
+const PrimaryPost: React.FC<ArtciclesProps> = ({Articles}) => {
   return (
     <Container>
       <Post>
         <h1>PHP8 - Novas features no PHP.</h1>
-        <p>Conheça as novas features no PHP 8.</p>
+        <p>aConheça as novas features no PHP 8.</p>
       </Post>
 
       <BoxPost>
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
+      {Articles.map( article => {
+        return (
+          <SecondPost key={article.id}>
+            <Link to={`/article/${article.id}`}>
+              <h1>{article.title}</h1>
+              {/* <p>{article.text}</p> */}
             </Link>
           </SecondPost>
-
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
-            </Link>
-          </SecondPost>
-
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
-            </Link>
-          </SecondPost>
-
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
-            </Link>
-          </SecondPost>
-
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
-            </Link>
-          </SecondPost>
-
-          <SecondPost>
-            <Link to="/article">
-              <h1>PHP8 - Novas features no PHP.</h1>
-              <p>Conheça as novas features no PHP 8.</p>
-            </Link>
-          </SecondPost>
-        
+        )
+      })}
       </BoxPost>
     </Container>
   );

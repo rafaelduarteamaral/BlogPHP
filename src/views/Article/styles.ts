@@ -82,61 +82,60 @@ export const TextArticle = styled.div`
       font-size: 20px;
     }
   }
-`;
+  
+  pre {
+    background: rgba(40, 41, 54, 1) !important;
+    border-radius: 0.5em;
+    padding: 1em;
+    margin: 0.5em 0;
+    overflow: auto;
+    height: auto;
+    display: block;
+
+    
+    code[class*="code-"], pre[class*="code-"] {
+        color: #ccc;
+        background: rgb(40, 41, 54);
+        text-shadow: none;
+        font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.8;
+        font-size: 16px;
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
 
 
-export const TextCode = styled.pre`
+        .keyword {
+          color: var(--gradient-violet-end);
+        }
 
-  background: rgba(40, 41, 54, 1) !important;
-  border-radius: 0.5em;
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-  height: auto;
-  display: block;
+        .function {
+          color: var(--gradient-green-end);
 
+        }
 
-  code[class*="code-"], pre[class*="code-"] {
-      color: #ccc;
-      background: rgb(40, 41, 54);
-      text-shadow: none;
-      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-      text-align: left;
-      white-space: pre;
-      word-spacing: normal;
-      word-break: normal;
-      word-wrap: normal;
-      line-height: 1.8;
-      font-size: 16px;
-      -moz-tab-size: 4;
-      -o-tab-size: 4;
-      tab-size: 4;
-      -webkit-hyphens: none;
-      -moz-hyphens: none;
-      -ms-hyphens: none;
-      hyphens: none;
+        .operator {
+          color: var(--gradient-blue-end);
+        }
 
+        .string {
+          color: var(--gradient-orange-end);
 
-      .keyword {
-        color: var(--gradient-violet-end);
-      }
+        }
 
-      .function {
-        color: var(--gradient-green-end);
-
-      }
-
-      .operator {
-        color: var(--gradient-blue-end);
-      }
-
-      .string {
-        color: var(--gradient-orange-end);
-
-      }
-
-      .comment {
-        color: rgba(98, 114, 164, 1);
-      }
+        .comment {
+          color: rgba(98, 114, 164, 1);
+        }
+    }
   }
+  
 `;
