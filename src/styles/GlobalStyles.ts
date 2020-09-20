@@ -12,7 +12,6 @@ export default createGlobalStyle`
       font-family: Roboto, sans-serif;
   }
   
-
   :root {
     --color-background: #EEEEEE;
     --color-text: #161B3D;
@@ -20,7 +19,6 @@ export default createGlobalStyle`
     --color-text-subtitle: #999999;
     --color-post-none-img: #617CBE;
   }
-
   
   pre::-webkit-scrollbar {
     width: 14px;
@@ -36,8 +34,6 @@ export default createGlobalStyle`
     border-radius: 0px;
   }
 
-  
-
   body::-webkit-scrollbar {
     width: 14px;
   }
@@ -51,7 +47,4 @@ export default createGlobalStyle`
     background-color: #EEEEEE;
     border-radius: 0px;
   }
-
-
-
 `;

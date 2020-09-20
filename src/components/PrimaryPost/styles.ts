@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import img_post from './../../assets/img_post.png';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   margin-top: 50px;
+  align-items: center;
 `;
 
 export const Post = styled.div`
-  max-width: 80%;
+  width: 80vw;
   height: 425px;
   background-color: var(--color-post-none-img);
   border-radius: 0.5em;
@@ -32,19 +36,27 @@ export const BoxPost = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   text-decoration: none;
-  max-width: 1256px;
+  max-width: 75vw;
   flex-wrap: wrap;
 
-`;
-
+  @media(max-width: 1000px) {
+    flex-direction: column;
+  }
+`
 
 export const SecondPost = styled.div`
-  max-width: 381px;
-  height: 324px;
+  max-width: 30%;
+  height: 40vh;
+
+  @media(max-width: 1000px) {
+    max-width: 80%;
+    height: 50vw;
+  }
+
   background-image: url(${img_post});
   border-radius: 0.5em;
   text-align: center;
-  padding-top: 150px;
+  padding-top: 10vw;
   margin: 30px auto;
   background-size: 100% 100%;
   z-index: 1;
