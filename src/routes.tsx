@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import Dashboard from './views/Dashboard';
-import Article from './views/Article';
+import ArticleView from './views/ArticleView';
 import Login from './views/Login';
 import EditArticle from './views/EditArticle';
 import ViewArticles from './views/ViewArticles';
@@ -25,7 +25,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Route path="/" exact component={Dashboard} />
-      <Route path="/article/:id" component={Article} />
+      <Route path="/article/:id" component={ArticleView} />
       <Route path="/login" component={Login} />
       <PrivateRoute path="/viewarticles" component={ViewArticles} />
       <PrivateRoute path="/editarticle/:id" exact component={EditArticle} />

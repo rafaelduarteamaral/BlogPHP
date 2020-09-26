@@ -1,51 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import { bindActionCreators, Dispatch } from 'redux';
 import HeaderAdmin from '../../components/HeaderAdmin';
+import { ApplicationState } from '../../store';
+import { Article } from '../../store/ducks/articles/types';
 import { Container, SecondPost, BoxPost, NewArticle } from './styles';
+import * as ArticleActios from '../../store/ducks/articles/actions';
 
-interface ArtciclesProps {
-  articles: Array<{
-    id: number;
-    title: string;
-    img: string;
-    text: string;
-  }>;
+interface StateProps {
+  articles: Article[]
+};
+
+interface DispatchProps {
+  loadRequest(): void
+};
+
+type Props = StateProps & DispatchProps;
+
+class ViewArticles extends Component<Props> {
+
+  componentDidMount() {
+    const { loadRequest } = this.props;
+    loadRequest();
+  }
+
+  render() {
+    const { articles } = this.props;
+    return (
+        <Container>
+            <HeaderAdmin />
+            <BoxPost>
+              {articles.map( (article: any) => {
+                return (
+                  <SecondPost key={article.id}>
+                    <Link to={`/editarticle/${article.id}`}>
+                      <h1>{article.title}</h1>
+                      {/* <p>{article.text}</p> */}
+                    </Link>
+                  </SecondPost>
+                )
+              })}
+            </BoxPost>
+            <NewArticle>
+              <Link className="buttonNewArticle" to={`/editarticle`}> + </Link>
+            </NewArticle>
+        </Container>
+    );
+  }
 }
 
 
-const ViewArticles: React.FC<ArtciclesProps> = () => {
-  const [articles, setArticles] = useState([]);
-  
-  useEffect(() => {
-    api.get('articles').then(response => {
-      const todoArticles = response.data;
-      setArticles(todoArticles);
-    })
-  }, []);
+const mapStateToProps = (state: ApplicationState) => ({
+  articles: state.articles.data,
+});
 
-  return (
-      <Container>
-          <HeaderAdmin />
-          <BoxPost>
-            {articles.map( (article: any) => {
-              return (
-                <SecondPost key={article.id}>
-                  <Link to={`/editarticle/${article.id}`}>
-                    <h1>{article.title}</h1>
-                    {/* <p>{article.text}</p> */}
-                  </Link>
-                </SecondPost>
-              )
-            })}
-          </BoxPost>
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ArticleActios, dispatch);
 
-          <NewArticle>
-            <Link className="buttonNewArticle" to={`/editarticle`}> + </Link>
-          </NewArticle>
-          
-      </Container>
-  );
-}
+export default connect(mapStateToProps, mapDispatchToProps)(ViewArticles);
 
-export default ViewArticles;

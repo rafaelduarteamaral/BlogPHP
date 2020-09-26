@@ -33,11 +33,11 @@ export const Post = styled.div`
 
 export const BoxPost = styled.div`
   display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
+  justify-content:space-between; 
   text-decoration: none;
-  max-width: 75vw;
+  width: 80%;
   flex-wrap: wrap;
+
 
   @media(max-width: 1000px) {
     flex-direction: column;
@@ -45,8 +45,9 @@ export const BoxPost = styled.div`
 `
 
 export const SecondPost = styled.div`
-  max-width: 30%;
+  width: 350px;
   height: 40vh;
+  
 
   @media(max-width: 1000px) {
     max-width: 80%;

@@ -3,17 +3,17 @@ import img_post from './../../assets/img_post.png';
 
 export const Container = styled.div`
   background-color: #5F49AB;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 `;
 
 export const BoxPost = styled.div`
   display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
+  justify-content:space-between; 
   text-decoration: none;
-  max-width: 75vw;
-  flex-wrap: wrap;
+  width: 100%;
 
+  flex-wrap: wrap;
   @media(max-width: 1000px) {
     flex-direction: column;
   }
@@ -40,11 +40,12 @@ export const NewArticle = styled.div`
 `;
 
 export const SecondPost = styled.div`
-  max-width: 30%;
+  width: 350px;
+  min-height: 40vh;
   height: 40vh;
 
   @media(max-width: 1000px) {
-    max-width: 80%;
+    max-width: 350px;
     height: 50vw;
   }
 

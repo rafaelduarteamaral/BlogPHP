@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import api from '../../services/api';
 
 
-const Article: React.FC = (props:any) => {
+const ArticleView: React.FC = (props:any) => {
   const [article, setArticle] = useState<any>({});
 
   async function getArticle() {
@@ -66,4 +66,4 @@ const Article: React.FC = (props:any) => {
   );
 }
 
-export default Article;
+export default ArticleView;
