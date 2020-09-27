@@ -13,7 +13,7 @@ export const BodyBox = styled.div`
     justify-content: center;
 `;
 
-export const Box = styled.div`
+export const Form = styled.form`
     background-color: #E8F0FE;
     min-width: 80vw;
     min-height: 80vh;

@@ -1,26 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Container } from './styles';
+import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import PrimaryPost from '../../components/PrimaryPost';
-import api from '../../services/api';
+import { Article } from '../../store/ducks/articles/types';
+import { ApplicationState } from '../../store';
+import * as ArticleActios from '../../store/ducks/articles/actions';
+import { bindActionCreators, Dispatch } from 'redux';
 
-const Dashboard: React.FC = () => {
+interface StateProps {
+  articles: Article[]
+};
 
-  const [articles, setArticles] = useState([]);
+interface DispatchProps {
+  loadRequest(): void
+};
 
-  useEffect(() => {
-    api.get('articles').then(response => {
-      const todoArticles = response.data;
-      setArticles(todoArticles);
-    })
-  }, []);
+type Props = StateProps & DispatchProps;
 
-  return (
-    <Container>
-      <Header />
-      <PrimaryPost Articles={articles}/>
-    </Container>
-  );
+class Dashboard extends Component<Props>{
+  componentDidMount() {
+    const { loadRequest } = this.props;
+    loadRequest();
+  }
+
+  render(){
+    const { articles } = this.props;
+    console.log(articles)
+    return (
+      <Container>
+        <Header />
+        <PrimaryPost Articles={articles}/>
+      </Container>
+    );
+  };
 }
 
-export default Dashboard;
+const mapStateToProps = (state: ApplicationState) => ({
+  articles: state.articles.data,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ArticleActios, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+

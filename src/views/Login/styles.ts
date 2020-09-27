@@ -10,6 +10,10 @@ export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media(max-width: 740px) {
+    flex-direction: column;
+  }
 `;
 
 export const BoxLogo = styled.div`
@@ -20,7 +24,6 @@ export const BoxLogo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 
   img {
     width: 40%;
@@ -28,12 +31,22 @@ export const BoxLogo = styled.div`
 
   label {
     font-size: 66px;
+    text-align: center;
     color: #fff;
     width: 60%;
   }
+
+  @media(max-width: 740px) {
+    label {
+      text-align: center;
+      font-size: 100%;
+      color: #fff;
+      width: 60%;
+    }
+  }
 `;
 
-export const BoxData = styled.div`
+export const Form = styled.form`
   width: 100vw;
   height: 100vh;
   display: flex;

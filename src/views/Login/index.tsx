@@ -1,29 +1,47 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 
-import { Container, Box, BoxLogo, BoxData, BoxInput } from './styles';
+import { Container, Box, BoxLogo, Form, BoxInput } from './styles';
 
 import Logo from './../../assets/new-php-logo.png';
 import { Link } from 'react-router-dom';
 
 import api from "../../services/api";
 import { login } from "../../services/auth";
+import { render } from '@testing-library/react';
 
-const Login: React.FC = (props:any) => {
-  const [user, setUser] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState({});
+interface StateProps {
+  history: any;
+}
 
-  async function logar() {
+interface DispatchProps {
+};
+
+type Props = StateProps & DispatchProps;
+
+
+class Login extends Component<Props> {
+
+  state = {
+    user: "",
+    password: "",
+    error: ""
+  }
+
+  private handleSignIn = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    const { user, password } = this.state;
     if (!user || !password) {
-      setError({ error: "Preencha e-mail e senha para continuar!" });
+      this.setState({ error: "Preencha e-mail e senha para continuar!" });
     } else {
       try {
         const response = await api.post("/login", { user, password });
         login(response.data.token);
         console.log(response)
-        props.history.push("/viewarticles");
+        this.props.history.push("/viewarticles");
       } catch (err) {
-        setError({
+        this.setState({
           error:
             "Houve um problema com o login, verifique suas credenciais. T.T"
         });
@@ -31,25 +49,36 @@ const Login: React.FC = (props:any) => {
     }  
   }
 
-  return (
-    <Container>
-      <Box>
-        <BoxLogo>
-          <img src={Logo} alt="PHP"/>
-          <label>Faça seu login na plataforma</label>
-        </BoxLogo>
-        <BoxData>
-          <BoxInput>
-              <input type="text" onChange={(e: any) => setUser(e.target.value)} />
-              <input type="password" onChange={(e: any) => setPassword(e.target.value)} />
-              <Link to="/" >Esqueci a senha</Link>
-              <button onClick={logar}>Entrar</button>
-              <Link to="/">Não tem uma conta? Registre-se</Link>
-          </BoxInput>
-        </BoxData>
-      </Box>
-    </Container>
-  );
+  render() {
+    
+    return (
+      <Container>
+        <Box>
+          <BoxLogo>
+            <img src={Logo} alt="PHP"/>
+            <label>Faça seu login na plataforma</label>
+          </BoxLogo>
+          <Form onSubmit={this.handleSignIn} noValidate={true}>
+              <BoxInput>
+                <input
+                type="email"
+                placeholder="Endereço de e-mail"
+                onChange={e => this.setState({ user: e.target.value })}
+                />
+                <input
+                type="password"
+                placeholder="Senha"
+                onChange={e => this.setState({ password: e.target.value })}
+                />                
+                <Link to="/" >Esqueci a senha</Link>
+                <button type="submit">Entrar</button>
+                <Link to="/">Não tem uma conta? Registre-se</Link>
+              </BoxInput>
+          </Form>
+        </Box>
+      </Container>
+    );
+  }
 }
 
 export default Login;
