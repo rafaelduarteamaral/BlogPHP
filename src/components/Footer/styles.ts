@@ -2,7 +2,16 @@ import styled from 'styled-components';
 import { Search } from "styled-icons/material"
 
 export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 150px 0px 50px 0px;
+
 `;
+
 
 export const HeaderTop = styled.div`
   display: flex;
@@ -45,8 +54,8 @@ export const Button = styled.div`
 `;
 
 export const SearchIcon = styled(Search)`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   color: var(--symbol);
   cursor: pointer;
 `;

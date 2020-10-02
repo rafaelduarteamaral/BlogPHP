@@ -7,6 +7,7 @@ import { Article } from '../../store/ducks/articles/types';
 import { ApplicationState } from '../../store';
 import * as ArticleActios from '../../store/ducks/articles/actions';
 import { bindActionCreators, Dispatch } from 'redux';
+import Footer from '../../components/Footer';
 
 interface StateProps {
   articles: Article[]
@@ -31,6 +32,7 @@ class Dashboard extends Component<Props>{
       <Container>
         <Header />
         <PrimaryPost Articles={articles}/>
+        <Footer/>
       </Container>
     );
   };
