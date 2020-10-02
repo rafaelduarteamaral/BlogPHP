@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, HeaderTop, Button, SearchIcon, ButtonContainer } from './styles';
+import { Container, HeaderTop } from './styles';
 import Logo from './../../assets/new-php-logo.png';
 
 const Footer: React.FC = () => {

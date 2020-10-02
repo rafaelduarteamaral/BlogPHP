@@ -36,8 +36,12 @@ class EditArticle extends Component<Props> {
       e: React.FormEvent<HTMLFormElement>
       ): Promise<void> => {
       e.preventDefault();
+
       const { title, img, text } = this.state;
       if (!title || !img || !text) {
+
+        console.log("aqui");
+
         this.setState({ error: "Preencha todos os dados para se cadastrar" });
       } else {
         try {
@@ -69,7 +73,7 @@ class EditArticle extends Component<Props> {
                         type="text"
                         placeholder="title"
                         defaultValue={articles.length > 0 ? articles[0].title : ""}
-                        onChange={e => this.setState({ user: e.target.value })}
+                        onChange={e => this.setState({ title: e.target.value })}
                         />
                     </InputBox>
                     <InputBox>
@@ -78,7 +82,7 @@ class EditArticle extends Component<Props> {
                         type="text"
                         placeholder="Image"
                         defaultValue={articles.length > 0 ? articles[0].img : ""}
-                        onChange={e => this.setState({ user: e.target.value })}
+                        onChange={e => this.setState({ img: e.target.value })}
                         />
                     </InputBox>
                     <InputBox>
@@ -87,7 +91,7 @@ class EditArticle extends Component<Props> {
                         id="story" 
                         name="story"
                         defaultValue={articles.length > 0 ? articles[0].text : ""}
-                        onChange={e => this.setState({ user: e.target.value })} >
+                        onChange={e => this.setState({ text: e.target.value })} >
                         </textarea>
                     </InputBox>
                     <Buttons>

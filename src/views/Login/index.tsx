@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 
 import { Container, Box, BoxLogo, Form, BoxInput } from './styles';
 
@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 import api from "../../services/api";
 import { login } from "../../services/auth";
-import { render } from '@testing-library/react';
 
 interface StateProps {
   history: any;

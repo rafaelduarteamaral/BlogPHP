@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Search } from "styled-icons/material"
 
 export const Container = styled.div`
   display: flex;
@@ -35,29 +34,5 @@ export const HeaderTop = styled.div`
   }
 `;
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  width: 50%;
-  align-items: center;
-  justify-content: center;
-  input {
-    border-radius: 8px;
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-    font-size: 17px;
-  }
-`;
-
-export const Button = styled.div`
-
-`;
-
-export const SearchIcon = styled(Search)`
-  width: 50px;
-  height: 50px;
-  color: var(--symbol);
-  cursor: pointer;
-`;
 
 

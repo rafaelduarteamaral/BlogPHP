@@ -45,7 +45,7 @@ export const BoxPost = styled.div`
 `
 
 export const SecondPost = styled.div`
-  width: 350px;
+  width: 31%;
   height: 40vh;
   
 
