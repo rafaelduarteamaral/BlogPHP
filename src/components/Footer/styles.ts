@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 16px 32px;
   align-items: center;

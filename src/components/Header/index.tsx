@@ -11,16 +11,16 @@ const Header: React.FC = () => {
         <Link to="/">
           <img src={Logo} alt="Logo php"/>
         </Link>
-        <ButtonContainer>
-          <input type="text" placeholder="Pesquisar..." />
-          <Button><SearchIcon /></Button>
-        </ButtonContainer>
         <div className="menu-options">
           <Link to="/">PHP</Link>
           <Link to="/">NODEJS</Link>
           <Link to="/">REACTJS</Link>
         </div>
       </HeaderTop>
+      <ButtonContainer>
+          <input type="text" placeholder="Pesquisar..." />
+          <Button><SearchIcon /></Button>
+      </ButtonContainer>
     </Container>
   );
 }

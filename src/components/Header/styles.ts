@@ -2,12 +2,17 @@ import styled from 'styled-components';
 import { Search } from "styled-icons/material"
 
 export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   padding: 16px 32px;
   align-items: center;
@@ -28,12 +33,13 @@ export const HeaderTop = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  width: 50%;
+  width: 100%;
   align-items: center;
   justify-content: center;
+
   input {
     border-radius: 8px;
-    width: 100%;
+    width: 70%;
     height: 60px;
     padding: 10px;
     font-size: 17px;

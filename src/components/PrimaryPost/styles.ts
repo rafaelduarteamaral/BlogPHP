@@ -19,7 +19,6 @@ export const Post = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  
   h1 {
     color: var(--color-text-white);
     padding: 20px;
@@ -33,11 +32,11 @@ export const Post = styled.div`
 
 export const BoxPost = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content:space-between; 
   text-decoration: none;
   width: 80%;
   flex-wrap: wrap;
-
 
   @media(max-width: 1000px) {
     flex-direction: column;
@@ -45,17 +44,9 @@ export const BoxPost = styled.div`
 `
 
 export const SecondPost = styled.div`
-  width: 31%;
-  height: 40vh;
-  
-
-  @media(max-width: 1000px) {
-    max-width: 80%;
-    height: 50vw;
-  }
-
+  min-height: 370px;
   background-image: url(${img_post});
-  border-radius: 0.5em;
+  border-radius: 30px;
   text-align: center;
   padding-top: 10vw;
   margin: 30px auto;
