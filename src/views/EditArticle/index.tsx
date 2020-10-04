@@ -1,118 +1,106 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { Article } from '../../store/ducks/articles/types';
-import { ApplicationState } from '../../store';
+import React, { useEffect, MouseEvent } from 'react';
 import api from "../../services/api";
 
-import * as ArticleActios from '../../store/ducks/articles/actions';
-
 import HeaderAdmin from '../../components/HeaderAdmin';
-import { Container, BodyBox, Form, InputBox, Buttons, ButtonSuccess, ButtonDelete } from './styles';
+import { Container, BodyBox, BoxForm, InputBox, Buttons, ButtonSuccess, ButtonDelete } from './styles';
+import { useState } from 'react';
 
-
-interface StateProps {
-    articles: Article[]
-    history: any;
+interface IButtonPros {
+  onClick?:
+        | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+        | undefined;
 }
 
+const EditArticle: React.FC<IButtonPros> = (props:any) => {
 
+  const [article, setArticle] = useState<any>({});
+  const [title, setTitle] = useState('');
+  const [img, setImg] = useState('');
+  const [text, setText] = useState('');
 
-interface DispatchProps {
-  loadRequest(): void
-}
-
-type Props = StateProps & DispatchProps
-
-class EditArticle extends Component<Props> {
-
-  state = {
-    title: "",
-    img: "",
-    text: "",
+  async function getArticle() {
+    await api.get(`articles/${props.match.params.id}`).then(response => {
+      setArticle(response.data[0]);
+    });
   }
-
-  private registerArticle = async (
-      e: React.FormEvent<HTMLFormElement>
-      ): Promise<void> => {
-      e.preventDefault();
-
-      const { title, img, text } = this.state;
-      if (!title || !img || !text) {
-
-        console.log("aqui");
-
-        this.setState({ error: "Preencha todos os dados para se cadastrar" });
-      } else {
-        try {
-          await api.post("/articles", { title, img, text });
-          this.props.history.push("/");
-        } catch (err) {
-          console.log(err);
-          this.setState({ error: "Ocorreu um erro ao registrar sua conta. T.T" });
+  
+  const registerArticle = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    if (!title || !img || !text) {
+    } else {
+      try {
+        if(article.id) {
+          api.put(`/articles/${article.id}`, { id: article.id ,title, img, text });
+          alert('Update realizado com sucesso')
+        } else {
+          api.post("/articles", { title, img, text });
+          alert('cadastro realizado com sucesso')
         }
+
+      } catch (err) { 
+        alert(err);
       }
+    }
   }
 
-
-  componentDidMount() {
-    const { loadRequest } = this.props;
-    loadRequest();
+  const deleteArticle = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    try {
+      api.delete(`/articles/${article.id}`);
+      alert('Deletado com sucesso')
+    } catch (err) { 
+      alert(err);
+    }
   }
 
-  render() {
-    const { articles } = this.props;
-    return (
-        <Container>
-            <HeaderAdmin />
-            <BodyBox>
-                <Form onSubmit={this.registerArticle} noValidate={true}>
-                    <InputBox>
-                        <label>Titulo sobre o arigo.</label>
-                        <input
-                        type="text"
-                        placeholder="title"
-                        defaultValue={articles.length > 0 ? articles[0].title : ""}
-                        onChange={e => this.setState({ title: e.target.value })}
-                        />
-                    </InputBox>
-                    <InputBox>
-                        <label>Inserir Imagem.</label>
-                        <input
-                        type="text"
-                        placeholder="Image"
-                        defaultValue={articles.length > 0 ? articles[0].img : ""}
-                        onChange={e => this.setState({ img: e.target.value })}
-                        />
-                    </InputBox>
-                    <InputBox>
-                        <label>Texto sobre o artigo.</label>
-                        <textarea 
-                        id="story" 
-                        name="story"
-                        defaultValue={articles.length > 0 ? articles[0].text : ""}
-                        onChange={e => this.setState({ text: e.target.value })} >
-                        </textarea>
-                    </InputBox>
-                    <Buttons>
-                        <ButtonSuccess>
-                            <button >Enviar</button>
-                        </ButtonSuccess>
-                        <ButtonDelete>
-                            <button >Deletar</button>
-                        </ButtonDelete>
-                    </Buttons>
-                </Form>
-            </BodyBox>
-        </Container>
-    );
-  }
+  useEffect(() => {
+    getArticle();
+  }, []);
+
+
+  return (
+      <Container>
+          <HeaderAdmin />
+          <BodyBox>
+              <BoxForm>
+                  <InputBox>
+                      <label>Titulo sobre o arigo.</label>
+                      <input
+                      type="text"
+                      placeholder="title"
+                      defaultValue={ article && article.title }
+                      onChange={e => setTitle(e.target.value)}
+                      />
+                  </InputBox>
+                  <InputBox>
+                      <label>Inserir Imagem.</label>
+                      <input
+                      type="text"
+                      placeholder="Image"
+                      defaultValue={ article && article.img }
+                      onChange={e => setImg(e.target.value)}
+                      />
+                  </InputBox>
+                  <InputBox>
+                      <label>Texto sobre o artigo.</label>
+                      <textarea 
+                      id="story" 
+                      name="story"
+                      defaultValue={ article && article.text }
+                      onChange={e => setText(e.target.value)} >
+                      </textarea>
+                  </InputBox>
+                  <Buttons>
+                      <ButtonSuccess>
+                          <button onClick={registerArticle}>Enviar</button>
+                      </ButtonSuccess>
+                      <ButtonDelete>
+                          <button onClick={deleteArticle}>Deletar</button>
+                      </ButtonDelete>
+                  </Buttons>
+              </BoxForm>
+          </BodyBox>
+      </Container>
+  );
 }
 
-const mapStateToProps = (state: ApplicationState) => ({
-    articles: state.articles.data,
-});
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ArticleActios, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditArticle);
+export default EditArticle;

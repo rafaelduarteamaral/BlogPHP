@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <Link to="/">REACTJS</Link>
         </div>
       </HeaderTop>
-      <p>© 2020 Blog da Rocketseat. Feito com {"<"}3. Published with Ghost.</p>
+      <p>© 2020 Blog da {"<DevCode/>"}. Feito com {"<"}3. Published with Ghost.</p>
     </Container>
   );
 }
