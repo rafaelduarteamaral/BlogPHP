@@ -59,8 +59,6 @@ const ArticleView: React.FC = (props:any) => {
         </p> */}
 
         <div className='codeBlock' dangerouslySetInnerHTML={{__html: article.text}} />
-
-        
       </TextArticle>
     </Container>
   );
